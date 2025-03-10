@@ -1,0 +1,60 @@
+from tkinter import *
+from tkinter.messagebox import *
+
+
+root=Tk()
+root.title("SPEED CONVERTER BY SHUBHAM LONE")
+root.geometry("1000x500+50+50")
+f =("Times New Roman", 30, "bold")
+
+labTitle = Label(root, text="SPEED CONVERTER", font =f, bg="azure")
+labTitle.place(x=200, y =30)
+
+def show():
+	choice = ""
+	if c.get() == 1:
+		try:
+			Mach = float(entSpeed.get())
+			if Mach < 0.0:
+				raise Exception("Speed cannot be Negative")
+			res = Mach * 1225
+			res = round(res,2)
+			labMsg.configure(text=res)
+		except ValueError:
+				showerror("issue", "Enter Integers only")
+		except Exception as e:
+				showerror("issue", e)
+	else:
+		try:
+			Kmph = float(entSpeed.get())
+			if Kmph < 0.0:
+				raise Exception("Speed cannot be negative")
+			res = Kmph / 1225
+			res = round(res,2)
+			labMsg.configure(text=res)
+		except ValueError:
+				showerror("issue", "Enter Integers only")
+		except Exception as e:
+				showerror("issue", e)				
+
+labEnt = Label(root,text="Enter Speed",font=f, bg="azure")
+labEnt.place(x=100, y=100)
+entSpeed = Entry(root, width=8,font=f)
+entSpeed.place(x=100, y=150)
+
+c = IntVar()
+c.set(1)
+rbKmph = Radiobutton(root, text="KMPH", font=f,bg="azure", variable=c, value=1)
+rbMach = Radiobutton(root, text="MACH", font=f, bg="azure", variable=c, value=2)
+rbKmph.place(x=400, y=100)
+rbMach.place(x=400, y=150)
+
+
+btnConvert = Button(root,text="CONVERT", font=f, command=show)
+btnConvert.place(x=400, y=300)
+labMsg = Label(root,width=8, font=f, bg="azure")
+labMsg.place(x=700, y=100)
+
+root.configure(bg="light cyan")
+root.resizable(height=0, width=0)
+root.mainloop()
